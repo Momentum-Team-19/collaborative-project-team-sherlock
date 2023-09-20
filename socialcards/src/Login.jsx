@@ -8,7 +8,10 @@ const Login = ({ setToken }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const loginUrl = "";
+    const loginUrl = "https://social-cards.fly.dev/api/auth/token/login/";
+    console.log("submitClick", username, password);
+
+    // setToken("Happy Birthday");
 
     axios
       .post(loginUrl, {
