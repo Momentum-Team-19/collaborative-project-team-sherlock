@@ -8,17 +8,17 @@ const Login = ({ setToken }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const loginUrl = "https://social-card.fly.dev/auth/token/login/";
+    const loginUrl = "https://social-cards.fly.dev/api/auth/token/login/";
     console.log("submitClick", username, password);
 
-    setToken("Happy Birthday");
+    // setToken("Happy Birthday");
 
-    // axios
-    //   .post(loginUrl, {
-    //     username: username,
-    //     password: password,
-    //   })
-    //   .then((res) => setToken(res.data.auth_token));
+    axios
+      .post(loginUrl, {
+        username: username,
+        password: password,
+      })
+      .then((res) => setToken(res.data.auth_token));
   };
 
   return (
