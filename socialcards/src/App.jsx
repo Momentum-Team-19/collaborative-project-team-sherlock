@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Login from "./Login";
 import Gallery from "./Gallery";
+import CardMaker from "./CardMaker";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -15,7 +16,9 @@ function App() {
     <>
       <h1>Social Card</h1>
 
-      {!isAuthenticated ? <Login setToken={setToken} /> : <Gallery />}
+      {/* {!isAuthenticated ? <Login setToken={setToken} /> : <Gallery />}
+      {!isAuthenticated ? <Login setToken={setToken} /> : <ShowCard />} 
+      {!isAuthenticated ? <Login setToken={setToken} /> : <CardMaker />} */}
     </>
   );
 }
