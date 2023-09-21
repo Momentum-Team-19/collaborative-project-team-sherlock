@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const CardMaker = () => {
-  // Setting state for the cover background
+  // Setting state for the preview blocks
   const [coverBackgroundColor, setCoverBackgroundColor] = useState("#ffffff");
   const [coverText, setCoverText] = useState("");
   const [textOrientation, setTextOrientation] = useState("center");
@@ -12,8 +12,10 @@ const CardMaker = () => {
   const [insideText, setInsideText] = useState("");
   const [insideTextOrientation, setInsideTextOrientation] = useState("center");
   const [insideSelectedFont, setInsideSelectedFont] = useState("Arial");
+  const [coverBorderColor, setCoverBorderColor] = useState("#000000");
+  const [coverBorderWidth, setCoverBorderWidth] = useState("0px");
 
-  // cover-preview handlers
+  // cover preview handlers
   const handleCoverBackgroundColorChange = (event) => {
     setCoverBackgroundColor(event.target.value);
   };
@@ -28,6 +30,14 @@ const CardMaker = () => {
 
   const handleFontChange = (event) => {
     setSelectedFont(event.target.value);
+  };
+
+  const handleCoverBorderColorChange = (event) => {
+    setCoverBorderColor(event.target.value);
+  };
+
+  const handleCoverBorderWidthChange = (event) => {
+    setCoverBorderWidth(event.target.value + "px");
   };
 
   // inside-preview handlers
@@ -108,6 +118,29 @@ const CardMaker = () => {
               <option value='Courier New'>Courier New</option>
             </select>
           </div>
+
+          <div className="single-option-container">
+            <label htmlFor="coverBorderColor">Choose a color to make a border: </label>
+            <input
+              type='color'
+              id='coverBorderColor'
+              name='coverBorderColor'
+              value={coverBorderColor}
+              onChange={handleCoverBorderColorChange}
+              />
+            </div>
+
+            <div className="single-option-container">
+              <label htmlFor="coverBorderWidth"></label>
+              <input
+                type='number'
+                id='coverBorderWidth'
+                name="coverBorderWidth"
+                value={parseInt(coverBorderWidth)}
+                onChange={handleCoverBorderWidthChange}
+                />
+              </div>
+          </div>
           {/* COPY POINT */}
           <div className='single-option-container'>
             <label htmlFor='insideBackgroundColor'>
@@ -176,6 +209,7 @@ const CardMaker = () => {
               backgroundColor: coverBackgroundColor,
               textAlign: textOrientation,
               fontFamily: selectedFont,
+              border: `${coverBorderWidth} solid ${coverBorderColor}`,
             }}
           >
             <h2>Box for previewing the cover.</h2>
@@ -195,7 +229,7 @@ const CardMaker = () => {
         </div>
       </div>
     </>
-  );
+    );
 };
 
 export default CardMaker;
