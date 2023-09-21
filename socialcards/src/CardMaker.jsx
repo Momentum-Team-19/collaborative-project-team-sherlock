@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const CardMaker = () => {
+const CardMaker = ({ token }) => {
   // Setting state for the preview blocks
   const [coverBackgroundColor, setCoverBackgroundColor] = useState("#ffffff");
   const [coverText, setCoverText] = useState("");
@@ -14,6 +14,20 @@ const CardMaker = () => {
   const [insideSelectedFont, setInsideSelectedFont] = useState("Arial");
   const [coverBorderColor, setCoverBorderColor] = useState("#000000");
   const [coverBorderWidth, setCoverBorderWidth] = useState("0px");
+
+  const handleSubmit = () => {
+    axios.post(
+      "https://social-cards.fly.dev/api/cards/",
+      {
+        front_text: coverText,
+      },
+
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    );
+    // .then(() => {});
+  };
 
   // cover preview handlers
   const handleCoverBackgroundColorChange = (event) => {
@@ -60,6 +74,7 @@ const CardMaker = () => {
   return (
     <>
       <div className='CMPage-header'>CardMaker</div>
+
       <div className='maker-container'>
         <div className='options-container'>
           <div className='single-option-container'>
@@ -119,27 +134,28 @@ const CardMaker = () => {
             </select>
           </div>
 
-          <div className="single-option-container">
-            <label htmlFor="coverBorderColor">Choose a color to make a border: </label>
+          <div className='single-option-container'>
+            <label htmlFor='coverBorderColor'>
+              Choose a color to make a border:{" "}
+            </label>
             <input
               type='color'
               id='coverBorderColor'
               name='coverBorderColor'
               value={coverBorderColor}
               onChange={handleCoverBorderColorChange}
-              />
-            </div>
+            />
+          </div>
 
-            <div className="single-option-container">
-              <label htmlFor="coverBorderWidth"></label>
-              <input
-                type='number'
-                id='coverBorderWidth'
-                name="coverBorderWidth"
-                value={parseInt(coverBorderWidth)}
-                onChange={handleCoverBorderWidthChange}
-                />
-              </div>
+          <div className='single-option-container'>
+            <label htmlFor='coverBorderWidth'></label>
+            <input
+              type='number'
+              id='coverBorderWidth'
+              name='coverBorderWidth'
+              value={parseInt(coverBorderWidth)}
+              onChange={handleCoverBorderWidthChange}
+            />
           </div>
           {/* COPY POINT */}
           <div className='single-option-container'>
@@ -200,8 +216,8 @@ const CardMaker = () => {
               <option value='Courier New'>Courier New</option>
             </select>
           </div>
+          <button onClick={handleSubmit}>Submit</button>
         </div>
-
         <div className='preview-container'>
           <div
             className='cover-preview'
@@ -229,7 +245,7 @@ const CardMaker = () => {
         </div>
       </div>
     </>
-    );
+  );
 };
 
 export default CardMaker;
