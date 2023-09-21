@@ -16,13 +16,17 @@ function App() {
     <>
       <h1>Social Card</h1>
 
-      {/* {!isAuthenticated ? <Login setToken={setToken} /> : <Gallery />}
-      {!isAuthenticated ? <Login setToken={setToken} /> : <ShowCard />} */}
+
+      {/*{!isAuthenticated ? <Login setToken={setToken} /> : <Gallery token={token} />}
+      {!isAuthenticated ? <Login setToken={setToken} /> : <ShowCard />}
       {!isAuthenticated ? (
         <Login setToken={setToken} />
       ) : (
         <CardMaker token={token} />
-      )}
+      )} */}
+
+
+
     </>
   );
 }
