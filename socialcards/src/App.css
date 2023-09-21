@@ -41,6 +41,18 @@
   color: #888;
 }
 
-.preview-box {
+.cover-preview {
+  color: black;
   border: 1px solid white;
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+}
+
+.inside-preview {
+  color: black;
+  border: 1px solid white;
+  height: 300px;
+  width: 300px;
+  margin: 10px;
 }
