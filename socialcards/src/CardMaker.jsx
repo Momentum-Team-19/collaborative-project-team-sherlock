@@ -81,17 +81,13 @@ const CardMaker = ({ token }) => {
             <label htmlFor='coverBackgroundColor'>
               Choose your cover background color:
             </label>
-            <select
+            <input
+              type='color'
               id='coverBackgroundColor'
               name='coverBackgroundColor'
               value={coverBackgroundColor}
               onChange={handleCoverBackgroundColorChange}
-            >
-              <option value='#ffffff'>White</option>
-              <option value='#ff0000'>Red</option>
-              <option value='#00ff00'>Green</option>
-              <option value='#0000ff'>Blue</option>
-            </select>
+            />
           </div>
 
           <div className='single-option-container'>
@@ -162,17 +158,13 @@ const CardMaker = ({ token }) => {
             <label htmlFor='insideBackgroundColor'>
               Choose inside background color:
             </label>
-            <select
+            <input
+              type='color'
               id='insideBackgroundColor'
               name='insideBackgroundColor'
               value={insideBackgroundColor}
               onChange={handleInsideBackgroundColorChange}
-            >
-              <option value='#ffffff'>White</option>
-              <option value='#ff0000'>Red</option>
-              <option value='#00ff00'>Green</option>
-              <option value='#0000ff'>Blue</option>
-            </select>
+            />
           </div>
 
           <div className='single-option-container'>
