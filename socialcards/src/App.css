@@ -126,3 +126,7 @@ button:focus-visible {
 .CMPage-header {
   margin-bottom: 10px;
 }
+
+.galleryCard {
+  border: 2px solid white;
+}

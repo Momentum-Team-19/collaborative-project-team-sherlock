@@ -23,7 +23,7 @@ const Gallery = ({ token }) => {
     <div>
       <div className="galleryBox">
         {results.map((card) => (
-          <div key={card.id} style={{backgroundColor: card.background_color}}>{card.front_text}</div>
+          <div className ="galleryCard" key={card.id} style={{backgroundColor: card.background_color}}>{card.front_text}</div>
         )
 
         )}
