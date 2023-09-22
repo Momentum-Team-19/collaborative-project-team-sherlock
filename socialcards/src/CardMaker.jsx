@@ -18,6 +18,7 @@ const CardMaker = ({ token }) => {
   const [insideBorderWidth, setInsideBorderWidth] = useState("0px");
   const [mirrorBackgroundColor, setMirrorBackgroundColor] = useState(false);
   const [mirrorBorder, setMirrorBorder] = useState(false);
+  const [isDraft, setIsDraft] = useState(false);
 
   const handleSubmit = () => {
     axios.post(
@@ -101,6 +102,10 @@ const CardMaker = ({ token }) => {
       setInsideBorderColor("#000000");
       setInsideBorderWidth("0px");
     }
+  };
+
+  const handleDraftChange = (event) => {
+    setIsDraft(event.target.checked);
   };
 
   return (
@@ -242,7 +247,8 @@ const CardMaker = ({ token }) => {
           </div>
           <div className='single-option-container'>
             <label htmlFor='insideBorderColor'>
-              Choose a color to make an inside border:{" "}
+              Choose a color, then choose a border thickness to make an inside
+              border:{" "}
             </label>
             <input
               type='color'
@@ -284,6 +290,17 @@ const CardMaker = ({ token }) => {
               name='mirrorBorder'
               checked={mirrorBorder}
               onChange={handleMirrorBorderChange}
+            />
+          </div>
+
+          <div className='single-option-container'>
+            <label htmlFor='isDraft'>Mark as a Draft: </label>
+            <input
+              type='checkbox'
+              id='isDraft'
+              name='isDraft'
+              checked={isDraft}
+              onChange={handleDraftChange}
             />
           </div>
 
