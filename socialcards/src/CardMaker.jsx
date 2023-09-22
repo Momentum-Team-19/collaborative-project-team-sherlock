@@ -227,8 +227,8 @@ const CardMaker = () => {
                     <h2>{insideText}</h2>
                 </div>
             </div>
-        </div >
-    </>
+
+        </>
     );
 };
 
