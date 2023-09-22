@@ -5,26 +5,27 @@ import "./App.css";
 import Login from "./Login";
 import Gallery from "./Gallery";
 import CardMaker from "./CardMaker";
+import ShowCard from "./ShowCard"
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [token, setToken] = useState("");
-  const isAuthenticated = token.length !== 0;
-  console.log("isAuthenticated", isAuthenticated);
+    const [count, setCount] = useState(0);
+    const [token, setToken] = useState("");
+    const isAuthenticated = token.length !== 0;
+    console.log("isAuthenticated", isAuthenticated);
 
-  return (
-    <>
-      <h1>Social Card</h1>
+    return (
+        <>
+            <h1>Social Card</h1>
 
-      {/* {!isAuthenticated ? <Login setToken={setToken} /> : <Gallery />}
-      {!isAuthenticated ? <Login setToken={setToken} /> : <ShowCard />} */}
-      {!isAuthenticated ? (
-        <Login setToken={setToken} />
-      ) : (
-        <CardMaker token={token} />
-      )}
-    </>
-  );
+            {/* {!isAuthenticated ? <Login setToken={setToken} /> : <Gallery />} */}
+            {/* {!isAuthenticated ? <Login setToken={setToken} /> : <ShowCard />} */}
+            {/* {!isAuthenticated ? (
+                <Login setToken={setToken} />
+            ) : (
+                <CardMaker token={token} />
+            )} */}
+        </>
+    );
 }
 
 export default App;
