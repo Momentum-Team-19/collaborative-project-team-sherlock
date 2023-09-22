@@ -14,6 +14,8 @@ const CardMaker = ({ token }) => {
   const [insideSelectedFont, setInsideSelectedFont] = useState("Arial");
   const [coverBorderColor, setCoverBorderColor] = useState("#000000");
   const [coverBorderWidth, setCoverBorderWidth] = useState("0px");
+  const [insideBorderColor, setInsideBorderColor] = useState("#000000");
+  const [insideBorderWidth, setInsideBorderWidth] = useState("0px");
 
   const handleSubmit = () => {
     axios.post(
@@ -69,6 +71,14 @@ const CardMaker = ({ token }) => {
 
   const handleInsideFontChange = (event) => {
     setInsideSelectedFont(event.target.value);
+  };
+
+  const handleInsideBorderColorChange = (event) => {
+    setInsideBorderColor(event.target.value);
+  };
+
+  const handleInsideBorderWidthChange = (event) => {
+    setInsideBorderWidth(event.target.value + "px");
   };
 
   return (
@@ -208,6 +218,29 @@ const CardMaker = ({ token }) => {
               <option value='Courier New'>Courier New</option>
             </select>
           </div>
+          <div className='single-option-container'>
+            <label htmlFor='insideBorderColor'>
+              Choose a color to make an inside border:{" "}
+            </label>
+            <input
+              type='color'
+              id='insideBorderColor'
+              name='insideBorderColor'
+              value={insideBorderColor}
+              onChange={handleInsideBorderColorChange}
+            />
+          </div>
+
+          <div className='single-option-container'>
+            <label htmlFor='insideBorderWidth'></label>
+            <input
+              type='number'
+              id='insideBorderWidth'
+              name='insideBorderWidth'
+              value={parseInt(insideBorderWidth)}
+              onChange={handleInsideBorderWidthChange}
+            />
+          </div>
           <button onClick={handleSubmit}>Submit</button>
         </div>
         <div className='preview-container'>
@@ -229,6 +262,7 @@ const CardMaker = ({ token }) => {
               backgroundColor: insideBackgroundColor,
               textAlign: insideTextOrientation,
               fontFamily: insideSelectedFont,
+              border: `${insideBorderWidth} solid ${insideBorderColor}`,
             }}
           >
             <h2>Box for previewing the inside of the card.</h2>
