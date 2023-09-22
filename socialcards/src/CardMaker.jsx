@@ -28,6 +28,14 @@ const CardMaker = ({ token }) => {
       },
 
       {
+        back_text: insideText,
+      },
+
+      {
+        draft: isDraft,
+      },
+
+      {
         headers: { Authorization: `Token ${token}` },
       }
     );
