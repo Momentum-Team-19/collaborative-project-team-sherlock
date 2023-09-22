@@ -32,6 +32,18 @@ const CardMaker = ({ token }) => {
       },
 
       {
+        imageURL: null,
+      },
+
+      {
+        background_color: null,
+      },
+
+      {
+        font: selectedFont,
+      },
+
+      {
         draft: isDraft,
       },
 
