@@ -16,6 +16,7 @@ const CardMaker = ({ token }) => {
   const [coverBorderWidth, setCoverBorderWidth] = useState("0px");
   const [insideBorderColor, setInsideBorderColor] = useState("#000000");
   const [insideBorderWidth, setInsideBorderWidth] = useState("0px");
+  const [mirrorBackgroundColor, setMirrorBackgroundColor] = useState(false);
 
   const handleSubmit = () => {
     axios.post(
@@ -79,6 +80,15 @@ const CardMaker = ({ token }) => {
 
   const handleInsideBorderWidthChange = (event) => {
     setInsideBorderWidth(event.target.value + "px");
+  };
+
+  const handleMirrorBackgroundColorChange = (event) => {
+    setMirrorBackgroundColor(event.target.checked);
+    if (event.target.checked) {
+      setInsideBackgroundColor(coverBackgroundColor);
+    } else {
+      setInsideBackgroundColor("#ffffff");
+    }
   };
 
   return (
@@ -239,6 +249,18 @@ const CardMaker = ({ token }) => {
               name='insideBorderWidth'
               value={parseInt(insideBorderWidth)}
               onChange={handleInsideBorderWidthChange}
+            />
+          </div>
+          <div className='single-option-container'>
+            <label htmlFor='mirrorBackgroundColor'>
+              Mirror Background Color:
+            </label>
+            <input
+              type='checkbox'
+              id='mirrorBackgroundColor'
+              name='mirrorBackgroundColor'
+              checked={mirrorBackgroundColor}
+              onChange={handleMirrorBackgroundColorChange}
             />
           </div>
           <button onClick={handleSubmit}>Submit</button>
