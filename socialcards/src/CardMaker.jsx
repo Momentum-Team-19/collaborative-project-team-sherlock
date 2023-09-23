@@ -19,6 +19,18 @@ const CardMaker = ({ token }) => {
   const [mirrorBackgroundColor, setMirrorBackgroundColor] = useState(false);
   const [mirrorBorder, setMirrorBorder] = useState(false);
   const [isDraft, setIsDraft] = useState(false);
+  const [coverBorderStyle, setCoverBorderStyle] = useState("solid");
+  const [insideBorderStyle, setInsideBorderStyle] = useState("solid");
+  const borderStyles = [
+    "solid",
+    "dotted",
+    "dashed",
+    "double",
+    "groove",
+    "ridge",
+    "inset",
+    "outset",
+  ];
 
   const handleSubmit = () => {
     axios.post(
@@ -79,6 +91,10 @@ const CardMaker = ({ token }) => {
     setCoverBorderWidth(event.target.value + "px");
   };
 
+  const handleCoverBorderStyleChange = (event) => {
+    setCoverBorderStyle(event.target.value);
+  };
+
   // inside-preview handlers
   const handleInsideBackgroundColorChange = (event) => {
     setInsideBackgroundColor(event.target.value);
@@ -104,6 +120,10 @@ const CardMaker = ({ token }) => {
     setInsideBorderWidth(event.target.value + "px");
   };
 
+  const handleInsideBorderStyleChange = (event) => {
+    setInsideBorderStyle(event.target.value);
+  };
+
   const handleMirrorBackgroundColorChange = (event) => {
     setMirrorBackgroundColor(event.target.checked);
     if (event.target.checked) {
@@ -118,9 +138,11 @@ const CardMaker = ({ token }) => {
     if (event.target.checked) {
       setInsideBorderColor(coverBorderColor);
       setInsideBorderWidth(coverBorderWidth);
+      setInsideBorderStyle(coverBorderStyle);
     } else {
       setInsideBorderColor("#000000");
       setInsideBorderWidth("0px");
+      setInsideBorderStyle("");
     }
   };
 
@@ -189,7 +211,8 @@ const CardMaker = ({ token }) => {
 
           <div className='single-option-container'>
             <label htmlFor='coverBorderColor'>
-              Choose a color to make a border:{" "}
+              Choose a color, then choose a border thickness to make an inside
+              border:{" "}
             </label>
             <input
               type='color'
@@ -210,7 +233,24 @@ const CardMaker = ({ token }) => {
               onChange={handleCoverBorderWidthChange}
             />
           </div>
-          {/* COPY POINT */}
+
+          <div className='single-option-container'>
+            <label htmlFor='coverBorderStyle'>Choose cover border style:</label>
+            <select
+              id='coverBorderStyle'
+              name='coverBorderStyle'
+              value={coverBorderStyle}
+              onChange={handleCoverBorderStyleChange}
+            >
+              {borderStyles.map((style) => (
+                <option key={style} value={style}>
+                  {style}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* COVER -> INSIDE POINT */}
           <div className='single-option-container'>
             <label htmlFor='insideBackgroundColor'>
               Choose inside background color:
@@ -289,6 +329,25 @@ const CardMaker = ({ token }) => {
               onChange={handleInsideBorderWidthChange}
             />
           </div>
+
+          <div className='single-option-container'>
+            <label htmlFor='insideBorderStyle'>
+              Choose inside border style:
+            </label>
+            <select
+              id='insideBorderStyle'
+              name='insideBorderStyle'
+              value={insideBorderStyle}
+              onChange={handleInsideBorderStyleChange}
+            >
+              {borderStyles.map((style) => (
+                <option key={style} value={style}>
+                  {style}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className='single-option-container'>
             <label htmlFor='mirrorBackgroundColor'>
               Mirror Background Color:
@@ -324,6 +383,7 @@ const CardMaker = ({ token }) => {
             />
           </div>
 
+          {/* OPTIONS TO PREVIEW SWAP POINT */}
           <button onClick={handleSubmit}>Submit</button>
         </div>
         <div className='preview-container'>
@@ -333,7 +393,7 @@ const CardMaker = ({ token }) => {
               backgroundColor: coverBackgroundColor,
               textAlign: textOrientation,
               fontFamily: selectedFont,
-              border: `${coverBorderWidth} solid ${coverBorderColor}`,
+              border: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
             }}
           >
             <h2>Box for previewing the cover.</h2>
@@ -345,7 +405,7 @@ const CardMaker = ({ token }) => {
               backgroundColor: insideBackgroundColor,
               textAlign: insideTextOrientation,
               fontFamily: insideSelectedFont,
-              border: `${insideBorderWidth} solid ${insideBorderColor}`,
+              border: `${insideBorderWidth} ${insideBorderStyle} ${insideBorderColor}`,
             }}
           >
             <h2>Box for previewing the inside of the card.</h2>
