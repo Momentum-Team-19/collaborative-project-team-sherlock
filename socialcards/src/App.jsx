@@ -27,6 +27,9 @@ function App() {
       <Link to={{ pathname: "/login" }} className='sub-page-link'>
         Login
       </Link>
+      <Link to={{ pathname: "/" }} className='sub-page-link'>
+        Gallery
+      </Link>
       <Link to={{ pathname: "/cardmaker" }} className='sub-page-link'>
         Card Maker
       </Link>
