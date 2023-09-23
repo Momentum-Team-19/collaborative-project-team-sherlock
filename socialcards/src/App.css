@@ -99,6 +99,7 @@ button:focus-visible {
 }
 
 .options-container {
+  text-align: right;
   border: 1px solid pink;
   margin: 15px;
   width: 350px;
@@ -119,8 +120,9 @@ button:focus-visible {
 }
 
 .single-option-container {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+  padding-right: 10px;
 }
 
 .CMPage-header {
@@ -138,4 +140,7 @@ button:focus-visible {
 
 .galleryCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+.sub-page-link {
+  padding: 10px;
+  padding-top: 200px;
 }
