@@ -25,6 +25,7 @@ const CardMaker = ({ token }) => {
   const [results, setResults] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [coverTextColor, setCoverTextColor] = useState("#000000");
+  const [addTextShadow, setAddTextShadow] = useState(false);
   const borderStyles = [
     "solid",
     "dotted",
@@ -78,6 +79,10 @@ const CardMaker = ({ token }) => {
 
   const handleCoverTextColorChange = (event) => {
     setCoverTextColor(event.target.value);
+  };
+
+  const handleTextShadowChange = (event) => {
+    setAddTextShadow(event.target.checked);
   };
 
   const handleCoverBackgroundColorChange = (event) => {
@@ -203,6 +208,17 @@ const CardMaker = ({ token }) => {
               name='coverTextColor'
               value={coverTextColor}
               onChange={handleCoverTextColorChange}
+            />
+          </div>
+
+          <div className='single-option-container'>
+            <label htmlFor='addTextShadow'>Add text shadow: </label>
+            <input
+              type='checkbox'
+              id='addTextShadow'
+              name='addTextShadow'
+              checked={addTextShadow}
+              onChange={handleTextShadowChange}
             />
           </div>
 
@@ -443,6 +459,7 @@ const CardMaker = ({ token }) => {
               justifyContent: "center",
               alignItems: "center",
               color: coverTextColor,
+              textShadow: addTextShadow ? "2px 2px 2px #000000" : "none",
               border: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
             }}
           >
