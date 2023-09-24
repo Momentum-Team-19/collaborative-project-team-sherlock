@@ -22,7 +22,6 @@ const CardMaker = ({ token }) => {
   const [isDraft, setIsDraft] = useState(false);
   const [coverBorderStyle, setCoverBorderStyle] = useState("solid");
   const [insideBorderStyle, setInsideBorderStyle] = useState("solid");
-  const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const borderStyles = [
     "solid",
@@ -67,22 +66,6 @@ const CardMaker = ({ token }) => {
       }
     );
   };
-
-  useEffect(() => {
-    if (searchTerm) {
-      const picURL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=SpMo7_x_TftYeBiuef_NpWCGNYRtUSXFjq0NG1tJAb4`;
-      axios
-        .get(picURL)
-        .then((response) => {
-          setResults(response.data.results); // Set the results state with the data from the API
-          console.log("results: ", results);
-          console.log("picURL: ", picURL);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    }
-  }, [searchTerm]);
 
   // cover preview handlers
   const handleCoverBackgroundColorChange = (event) => {
@@ -213,7 +196,7 @@ const CardMaker = ({ token }) => {
           </div>
 
           <div className='single-option-container'>
-            <SearchBar setSearchTerm={setSearchTerm} />
+            <SearchBar setResults={setResults} results={results} />
           </div>
 
           <div className='single-option-container'>
