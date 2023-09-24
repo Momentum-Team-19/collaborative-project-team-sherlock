@@ -23,6 +23,7 @@ const CardMaker = ({ token }) => {
   const [coverBorderStyle, setCoverBorderStyle] = useState("solid");
   const [insideBorderStyle, setInsideBorderStyle] = useState("solid");
   const [results, setResults] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
   const borderStyles = [
     "solid",
     "dotted",
@@ -46,7 +47,7 @@ const CardMaker = ({ token }) => {
       },
 
       {
-        imageURL: null,
+        imageURL: `${selectedImage}`,
       },
 
       {
@@ -68,6 +69,12 @@ const CardMaker = ({ token }) => {
   };
 
   // cover preview handlers
+  const handleImageClick = (imageURL) => {
+    setSelectedImage(imageURL);
+    setMirrorBackgroundColor(false);
+    setInsideBackgroundColor("ffffff");
+  };
+
   const handleCoverBackgroundColorChange = (event) => {
     setCoverBackgroundColor(event.target.value);
   };
@@ -157,18 +164,20 @@ const CardMaker = ({ token }) => {
 
       <div className='maker-container'>
         <div className='options-container'>
-          <div className='single-option-container'>
-            <label htmlFor='coverBackgroundColor'>
-              Choose your cover background color:
-            </label>
-            <input
-              type='color'
-              id='coverBackgroundColor'
-              name='coverBackgroundColor'
-              value={coverBackgroundColor}
-              onChange={handleCoverBackgroundColorChange}
-            />
-          </div>
+          {!selectedImage && (
+            <div className='single-option-container'>
+              <label htmlFor='coverBackgroundColor'>
+                Choose your cover background color:
+              </label>
+              <input
+                type='color'
+                id='coverBackgroundColor'
+                name='coverBackgroundColor'
+                value={coverBackgroundColor}
+                onChange={handleCoverBackgroundColorChange}
+              />
+            </div>
+          )}
 
           <div className='single-option-container'>
             <label htmlFor='coverText'>Add cover text here: </label>
@@ -198,6 +207,19 @@ const CardMaker = ({ token }) => {
           <div className='single-option-container'>
             <SearchBar setResults={setResults} results={results} />
           </div>
+
+          {results.length > 0 && (
+            <div className='search-results-box'>
+              {results.map((result) => (
+                <img
+                  key={result.id}
+                  src={result.urls.small}
+                  alt={result.description}
+                  onClick={() => handleImageClick(result.urls.small)}
+                />
+              ))}
+            </div>
+          )}
 
           <div className='single-option-container'>
             <label htmlFor='selectedFont'>Choose a font: </label>
@@ -296,7 +318,7 @@ const CardMaker = ({ token }) => {
             </select>
           </div>
 
-          {/* <div className='single-option-container'>
+          <div className='single-option-container'>
             <label htmlFor='insideSelectedFont'>Choose inside font: </label>
             <select
               id='insideSelectedFont'
@@ -351,7 +373,7 @@ const CardMaker = ({ token }) => {
                 </option>
               ))}
             </select>
-          </div> */}
+          </div>
 
           <div className='single-option-container'>
             <label htmlFor='mirrorBackgroundColor'>
@@ -392,18 +414,21 @@ const CardMaker = ({ token }) => {
           <button onClick={handleSubmit}>Submit</button>
         </div>
         <div className='preview-container'>
+          <h3>Cover Preview</h3>
           <div
             className='cover-preview'
             style={{
+              backgroundImage: `url(${selectedImage})`,
+              backgroundSize: "cover",
               backgroundColor: coverBackgroundColor,
               textAlign: textOrientation,
               fontFamily: selectedFont,
               border: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
             }}
           >
-            <h2>Box for previewing the cover.</h2>
             <h2>{coverText}</h2>
           </div>
+          <h3>Inside Preview</h3>
           <div
             className='inside-preview'
             style={{
@@ -413,7 +438,6 @@ const CardMaker = ({ token }) => {
               border: `${insideBorderWidth} ${insideBorderStyle} ${insideBorderColor}`,
             }}
           >
-            <h2>Box for previewing the inside of the card.</h2>
             <h2>{insideText}</h2>
           </div>
         </div>

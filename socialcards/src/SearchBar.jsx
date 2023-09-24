@@ -7,18 +7,11 @@ const SearchBar = ({ setResults, results }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
+    event.preventDefault();
     const encodedSearchTerm = encodeURIComponent(searchInput);
     setSearchTerm(encodedSearchTerm);
-  };
 
-  const handleEnter = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  useEffect(() => {
-    const picURL = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=SpMo7_x_TftYeBiuef_NpWCGNYRtUSXFjq0NG1tJAb4`;
+    const picURL = `https://api.unsplash.com/search/photos?query=${searchInput}&client_id=SpMo7_x_TftYeBiuef_NpWCGNYRtUSXFjq0NG1tJAb4`;
     axios
       .get(picURL)
       .then((response) => {
@@ -30,21 +23,23 @@ const SearchBar = ({ setResults, results }) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [searchTerm]);
+  };
 
   return (
-    <div className='search-bar'>
-      <FaSearch onClick={handleSearch} className='search-icon' />
-      <input
-        type='text'
-        id='search-icon'
-        name='search'
-        placeholder='search...'
-        value={searchInput}
-        onChange={(event) => setSearchInput(event.target.value)}
-        onKeyDown={handleEnter}
-      />
-    </div>
+    <form onSubmit={handleSearch}>
+      <div className='search-bar'>
+        <FaSearch onClick={handleSearch} className='search-icon' />
+        <input
+          type='text'
+          id='search-icon'
+          name='search'
+          placeholder='search...'
+          value={searchInput}
+          onChange={(event) => setSearchInput(event.target.value)}
+        />
+        <button type='submit'>Search</button>
+      </div>
+    </form>
   );
 };
 export default SearchBar;
