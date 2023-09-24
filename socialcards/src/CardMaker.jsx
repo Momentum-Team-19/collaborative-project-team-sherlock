@@ -26,6 +26,7 @@ const CardMaker = ({ token }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [coverTextColor, setCoverTextColor] = useState("#000000");
   const [addTextShadow, setAddTextShadow] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
   const borderStyles = [
     "solid",
     "dotted",
@@ -70,11 +71,21 @@ const CardMaker = ({ token }) => {
     );
   };
 
+  useEffect(() => {
+    // When results are available, show the search results box
+    setShowSearchResults(results.length > 0);
+  }, [results]);
+
   // cover preview handlers
   const handleImageClick = (imageURL) => {
     setSelectedImage(imageURL);
     setMirrorBackgroundColor(false);
     setInsideBackgroundColor("ffffff");
+  };
+
+  const handleClearSearch = () => {
+    setResults([]);
+    setShowSearchResults(false);
   };
 
   const handleCoverTextColorChange = (event) => {
@@ -241,7 +252,13 @@ const CardMaker = ({ token }) => {
           </div>
 
           {results.length > 0 && (
-            <div className='search-results-box'>
+            <div
+              className='search-results-box'
+              style={{ display: showSearchResults ? "block" : "none" }}
+            >
+              <button className='clear-search' onClick={handleClearSearch}>
+                Exit
+              </button>
               {results.map((result) => (
                 <img
                   key={result.id}
@@ -310,6 +327,7 @@ const CardMaker = ({ token }) => {
           </div>
 
           {/* COVER -> INSIDE POINT */}
+
           <div className='single-option-container'>
             <label htmlFor='insideBackgroundColor'>
               Choose inside background color:
