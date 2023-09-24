@@ -24,6 +24,7 @@ const CardMaker = ({ token }) => {
   const [insideBorderStyle, setInsideBorderStyle] = useState("solid");
   const [results, setResults] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [coverTextColor, setCoverTextColor] = useState("#000000");
   const borderStyles = [
     "solid",
     "dotted",
@@ -73,6 +74,10 @@ const CardMaker = ({ token }) => {
     setSelectedImage(imageURL);
     setMirrorBackgroundColor(false);
     setInsideBackgroundColor("ffffff");
+  };
+
+  const handleCoverTextColorChange = (event) => {
+    setCoverTextColor(event.target.value);
   };
 
   const handleCoverBackgroundColorChange = (event) => {
@@ -187,6 +192,17 @@ const CardMaker = ({ token }) => {
               name='coverText'
               value={coverText}
               onChange={handleCoverTextChange}
+            />
+          </div>
+
+          <div className='single-option-container'>
+            <label htmlFor='coverTextColor'>Choose cover text color: </label>
+            <input
+              type='color'
+              id='coverTextColor'
+              name='coverTextColor'
+              value={coverTextColor}
+              onChange={handleCoverTextColorChange}
             />
           </div>
 
@@ -423,6 +439,10 @@ const CardMaker = ({ token }) => {
               backgroundColor: coverBackgroundColor,
               textAlign: textOrientation,
               fontFamily: selectedFont,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: coverTextColor,
               border: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
             }}
           >
