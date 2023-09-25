@@ -140,7 +140,9 @@ button:focus-visible {
 
 .galleryCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
-.sub-page-link {
-  padding: 10px;
-  padding-top: 200px;
 }
+
+/* .sub-page-link {
+  padding: 10px;
+
+} */

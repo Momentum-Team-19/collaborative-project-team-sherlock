@@ -8,7 +8,6 @@ const Gallery = ({ token }) => {
   const [results, setResults] = useState([])
   const [currentIndex, SetCurrentIndex] = useState(0);
 
-
   useEffect(() => {
     axios
       .get("https://social-cards.fly.dev/api/cards/", {
@@ -16,11 +15,9 @@ const Gallery = ({ token }) => {
       })
       .then((response) => {
         setResults(response.data.results)
-      },
-      )
-  },[]
+      })
+  })
 
-  )
   return (
     <div>
       <div className="galleryBox">
@@ -46,4 +43,7 @@ const Gallery = ({ token }) => {
 }
 
 export default Gallery;
+
+// make gallery useable
+// conditional statement whether you have a token or not
 

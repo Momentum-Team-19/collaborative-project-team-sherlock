@@ -14,12 +14,13 @@ function App() {
   const isAuthenticated = token.length !== 0;
   const { pathname } = location;
   console.log("isAuthenticated", isAuthenticated);
-
+  console.log(token)
   return (
     <>
       <h1>Social Card</h1>
+
       <Routes>
-        <Route path='/' element={<Gallery />} />
+        <Route path='/' element={<Gallery token={token} />} />
         <Route path='/card/:id' element={<ShowCard />} />
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/cardmaker' element={<CardMaker />} />
@@ -29,6 +30,9 @@ function App() {
       </Link>
       <Link to={{ pathname: "/cardmaker" }} className='sub-page-link'>
         Card Maker
+      </Link>
+      <Link to={{ pathname: "/" }} className='sub-page-link'>
+        Gallery
       </Link>
     </>
   );
