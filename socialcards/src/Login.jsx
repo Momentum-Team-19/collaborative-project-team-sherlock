@@ -7,13 +7,14 @@ const Login = ({ setToken }) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    const loginUrl = "https://social-cards.fly.dev/api/auth/token/login/";
-    console.log("submitClick", username, password);
+        const loginUrl = "https://social-cards.fly.dev/api/auth/token/login/";
+        console.log("submitClick", username, password);
 
-    // setToken("Happy Birthday");
+        // setToken("Happy Birthday");
+
 
     axios
       .post(loginUrl, {
@@ -23,7 +24,6 @@ const Login = ({ setToken }) => {
       .then((res) => {
         setToken(res.data.auth_token);
         navigate("/");
-        console.log(res)
       });
   };
 
@@ -58,10 +58,9 @@ const Login = ({ setToken }) => {
         </div>
         <div>
           <button type='submit'>Login</button>
+
         </div>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default Login;
