@@ -259,14 +259,26 @@ const CardMaker = ({ token }) => {
               <button className='clear-search' onClick={handleClearSearch}>
                 Exit
               </button>
-              {results.map((result) => (
-                <img
-                  key={result.id}
-                  src={result.urls.small}
-                  alt={result.description}
-                  onClick={() => handleImageClick(result.urls.small)}
-                />
-              ))}
+              <div className='image-results'>
+                {results.map((result) => (
+                  <div
+                    key={result.id}
+                    className='image-container'
+                    style={{
+                      backgroundSize: "cover",
+                      width: "300px",
+                      height: "300px",
+                    }}
+                    onClick={() => handleImageClick(result.urls.small)}
+                  >
+                    <img
+                      className='mapped-image image-preview cover-preview'
+                      src={result.urls.small}
+                      alt={result.description}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

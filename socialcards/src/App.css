@@ -83,6 +83,13 @@ button:focus-visible {
   margin: 10px;
 }
 
+.image-preview {
+  background-size: "cover";
+  display: "flex";
+  justify-content: "center";
+  align-items: "center"
+}
+
 .inside-preview {
   color: black;
   border: 1px solid white;
@@ -130,6 +137,14 @@ button:focus-visible {
 }
 
 
+.image-container {
+  background-size: cover;
+  object-fit: cover;
+  width: 90%; /* Set the width to 100% to match the parent's width */
+  cursor: pointer;
+   /* Add this to maintain cursor pointer for clickable behavior */
+}
+
 
 .sub-page-link {
   margin: 20px;
@@ -155,4 +170,8 @@ button:focus-visible {
 .sub-page-link {
   padding: 10px;
   padding-top: 200px;
+}
+
+.mapped-image {
+ 
 }
