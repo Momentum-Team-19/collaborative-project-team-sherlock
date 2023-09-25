@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ const Login = ({ setToken }) => {
           />
         </div>
         <div>
-          <input type='submit' value='Log In' />
+          <button type='submit'>Login</button>
         </div>
       </form>
     </div>
