@@ -9,11 +9,11 @@ import ShowCard from "./ShowCard";
 import { Route, Routes, Link } from "react-router-dom";
 
 function App() {
+
     const [count, setCount] = useState(0);
     const [token, setToken] = useState("");
     const isAuthenticated = token.length !== 0;
     const { pathname } = location;
-    console.log("isAuthenticated", isAuthenticated);
 
     return (
         <>

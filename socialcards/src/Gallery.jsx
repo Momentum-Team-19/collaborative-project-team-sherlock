@@ -47,3 +47,6 @@ const Gallery = ({ token }) => {
 
 export default Gallery;
 
+// make gallery useable
+// conditional statement whether you have a token or not
+
