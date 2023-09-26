@@ -39,38 +39,81 @@ const CardMaker = ({ token }) => {
   ];
 
   console.log(token);
-  const handleSubmit = () => {
-    axios.post(
-      "https://social-cards.fly.dev/api/cards/",
-      {
-        styles: [
-          { property: "backgroundColor", value: `${coverBackgroundColor}` },
-          { property: "color", value: `${coverTextColor}` },
-          { property: "textShadow", value: `${addTextShadow}` },
-          { property: "textAlign", value: `${textOrientation}` },
-          {
-            property: "border",
-            value: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
-          },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-        ],
-        front_text: coverText,
-        back_text: insideText,
-        imageURL: `${selectedImage}`,
-        font: selectedFont,
-        draft: isDraft,
-      },
 
-      {
-        headers: { Authorization: `Token ${token}` },
-      }
-    );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        "https://social-cards.fly.dev/api/cards/",
+        {
+          front_text: coverText,
+          back_text: insideText,
+          image_url: selectedImage,
+        },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        return axios
+          .request({
+            url: `https://social-cards.fly.dev/api/cards/${res.data.id}/styles/`,
+            method: "POST",
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+            data: [
+              {
+                property: "backgroundColor",
+                value: coverBackgroundColor,
+              },
+              {
+                property: "fontFamily",
+                value: selectedFont,
+              },
+              {
+                property: "textAlign",
+                value: textOrientation,
+              },
+            ],
+          })
+          .then((res) => console.log(res.data));
+      });
   };
+  // const handleSubmit = () => {
+  //   axios.post(
+  //     "https://social-cards.fly.dev/api/cards/",
+  //     {
+  //       styles: [
+  //         { property: "backgroundColor", value: `${coverBackgroundColor}` },
+  //         { property: "color", value: `${coverTextColor}` },
+  //         { property: "textShadow", value: `${addTextShadow}` },
+  //         { property: "textAlign", value: `${textOrientation}` },
+  //         {
+  //           property: "border",
+  //           value: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
+  //         },
+  //         // { property: "", value: `${}` },
+  //         // { property: "", value: `${}` },
+  //         // { property: "", value: `${}` },
+  //         // { property: "", value: `${}` },
+  //         // { property: "", value: `${}` },
+  //         // { property: "", value: `${}` },
+  //       ],
+  //       front_text: coverText,
+  //       back_text: insideText,
+  //       imageURL: `${selectedImage}`,
+  //       font: selectedFont,
+  //       draft: isDraft,
+  //     },
+
+  //     {
+  //       headers: { Authorization: `Token ${token}` },
+  //     }
+  //   );
+  // };
 
   useEffect(() => {
     // When results are available, show the search results box
