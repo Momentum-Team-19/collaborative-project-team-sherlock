@@ -28,6 +28,7 @@ const Gallery = ({ token }) => {
               border: card.coverBorderWidth
               }}>
               {card.front_text}
+              {card.font}
             </div>
             </Link>
           </Tilt>
