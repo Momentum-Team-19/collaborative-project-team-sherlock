@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const ShowCard = () => {
     const [frontText, setFrontText] = useState('')
@@ -7,9 +8,11 @@ const ShowCard = () => {
     const [imageURL, setImageURL] = useState('')
     const [backgroundColor, setBackgroundColor] = useState('')
     const [font, setFont] = useState('')
+    const { cardID } = useParams()
     useEffect(() => {
         axios
-            .get('https://social-cards.fly.dev/api/cards/4/',
+            .get(`https://social-cards.fly.dev/api/cards/${cardID}/`,
+                { headers: { Authorization: `Token ${token}` } }
             )
             .then((response) => {
                 setFrontText(response.data.front_text);
