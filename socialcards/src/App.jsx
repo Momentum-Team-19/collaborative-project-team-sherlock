@@ -7,11 +7,12 @@ import Gallery from "./Gallery";
 import CardMaker from "./CardMaker";
 import ShowCard from "./ShowCard";
 import { Route, Routes, Link } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
   const [count, setCount] = useState(0);
-  const [token, setToken] = useState("");
-  const isAuthenticated = token.length !== 0;
+  const [token, setToken] = useLocalStorageState("Token", "");
+  const isAuthenticated = token !== "";
   const { pathname } = location;
 
   return (
@@ -19,9 +20,9 @@ function App() {
       <h1>Social Card</h1>
       <Routes>
         <Route path='/' element={<Gallery token={token} />} />
-        <Route path='/card/:cardID' element={<ShowCard token={token}/>} />
+        <Route path='/card/:cardID' element={<ShowCard token={token} />} />
         <Route path='/login' element={<Login setToken={setToken} />} />
-        <Route path='/cardmaker' element={<CardMaker />} />
+        <Route path='/cardmaker' element={<CardMaker token={token} />} />
       </Routes>
       <Link to={{ pathname: "/login" }} className='sub-page-link'>
         Login
