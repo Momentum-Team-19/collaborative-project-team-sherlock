@@ -19,10 +19,9 @@ function App() {
       <h1>Social Card</h1>
       <Routes>
         <Route path='/' element={<Gallery token={token} />} />
-        <Route path='/card/:id' element={<ShowCard />} />
+        <Route path='/card/:cardID' element={<ShowCard token={token}/>} />
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/cardmaker' element={<CardMaker />} />
-        <Route path='/showcard' element={<ShowCard token={token} />} />
       </Routes>
       <Link to={{ pathname: "/login" }} className='sub-page-link'>
         Login
@@ -30,7 +29,7 @@ function App() {
       <Link to={{ pathname: "/cardmaker" }} className='sub-page-link'>
         Card Maker
       </Link>
-      <Link to={{ pathname: "/showcard" }} className='sub-page-link'>
+      <Link to={{ pathname: "/card/3" }} className='sub-page-link'>
         Show Card
       </Link>
     </>
