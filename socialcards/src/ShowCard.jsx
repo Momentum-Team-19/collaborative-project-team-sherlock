@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const ShowCard = ({ token }) => {
+const ShowCard = () => {
     const [frontText, setFrontText] = useState('')
     const [backText, setBackText] = useState('')
     const [imageURL, setImageURL] = useState('')
@@ -23,13 +23,25 @@ const ShowCard = ({ token }) => {
             }
 
             )
-    }, [token]
+    }, []
     )
     return (
         <>
-            <h1>
-                Test
-            </h1>
+            <div>
+                <div>
+                    <img href={imageURL}>
+                    </img>
+                    <div>
+                        {frontText}
+                    </div>
+                    <div>
+                        {backText}
+                    </div>
+                    <div>
+                        {font}
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
@@ -41,3 +53,4 @@ export default ShowCard;
 // A way to capture username for 1st div
 // Showing imageURL for 2nd div
 // click to see caption 3rd div with onclick function (inside a ternary statement) 
+// edit card
