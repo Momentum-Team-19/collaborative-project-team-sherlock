@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const ShowCard = ({ token }) => {
+const ShowCard = () => {
     const [frontText, setFrontText] = useState('')
     const [backText, setBackText] = useState('')
     const [imageURL, setImageURL] = useState('')
@@ -9,8 +9,7 @@ const ShowCard = ({ token }) => {
     const [font, setFont] = useState('')
     useEffect(() => {
         axios
-            .get('https://social-cards.fly.dev/api/cards/3/',
-                { headers: { Authorization: `Token ${token}` } }
+            .get('https://social-cards.fly.dev/api/cards/4/',
             )
             .then((response) => {
                 setFrontText(response.data.front_text);
@@ -21,13 +20,25 @@ const ShowCard = ({ token }) => {
             }
 
             )
-    }, [token]
+    }, []
     )
     return (
         <>
-            <h1>
-                Test
-            </h1>
+            <div>
+                <div>
+                    <img href={imageURL}>
+                    </img>
+                    <div>
+                        {frontText}
+                    </div>
+                    <div>
+                        {backText}
+                    </div>
+                    <div>
+                        {font}
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
@@ -39,3 +50,4 @@ export default ShowCard;
 // A way to capture username for 1st div
 // Showing imageURL for 2nd div
 // click to see caption 3rd div with onclick function (inside a ternary statement) 
+// edit card
