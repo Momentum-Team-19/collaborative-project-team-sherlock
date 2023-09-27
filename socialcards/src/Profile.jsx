@@ -16,12 +16,13 @@ const Profile = ({ token }) => {
       })
   }, [token]);
 
-  const createStyleObject = (styles) => {
+  const createStyleObject = (styles, imageURL) => {
     console.log("creating style object")
     console.log("Here are the styles for a card ", styles)
     // make a new object using dynamic keys and values from the passed in styles
     const styleObj = {}
     styles.forEach(style => styleObj[style.property] = style.value)
+    styleObj['backgroundImage'] = `url(${imageURL})`
     console.log("Here is the new style object: ", styleObj)
     return styleObj
   }
@@ -33,9 +34,9 @@ const Profile = ({ token }) => {
       <h2>My Cards</h2>
       {/* {cards ? <h2>{cards[0].creator}'s cards</h2> : null} */}
       {cards &&
-      cards.map((card) => (
-        <Link to={{pathname:  `/card/${card.id}`}}>
-        <div className="gallery-preview"key={card.id} style={createStyleObject(card.styles)}>
+      cards.map((card, index) => (
+        <Link to={{pathname:  `/card/${card.id}`}} key={index}>
+        <div className="gallery-preview" key={card.id} style={createStyleObject(card.styles, card.imageURL)}>
               {card.front_text}
         </div>
         </Link>
