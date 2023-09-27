@@ -92,7 +92,6 @@ button:focus-visible {
 }
 
 .maker-container {
-  border: 1px solid white;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -100,14 +99,12 @@ button:focus-visible {
 
 .options-container {
   text-align: right;
-  border: 1px solid pink;
   margin: 15px;
   width: 350px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .preview-container {
-  border: 1px solid red;
   margin: 15px;
   width: 350px;
 }
