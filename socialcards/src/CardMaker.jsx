@@ -26,7 +26,7 @@ const CardMaker = ({ token }) => {
   const [results, setResults] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [coverTextColor, setCoverTextColor] = useState("#000000");
-  const [addTextShadow, setAddTextShadow] = useState(false);
+  const [addTextShadow, setAddTextShadow] = useState("");
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -80,6 +80,18 @@ const CardMaker = ({ token }) => {
                 property: "textAlign",
                 value: textOrientation,
               },
+              {
+                property: "color",
+                value: coverTextColor,
+              },
+              {
+                property: "textShadow",
+                value: addTextShadow,
+              },
+              {
+                property: "border",
+                value: `${coverBorderWidth} ${coverBorderColor} ${coverBorderStyle}`,
+              },
             ],
           })
 
@@ -87,7 +99,7 @@ const CardMaker = ({ token }) => {
             navigate("/");
           })
           .catch((error) => {
-            if (error.response) {
+            if (error) {
               setErrorMessage(error);
               console.log("error: ", error);
             }
@@ -117,7 +129,11 @@ const CardMaker = ({ token }) => {
   };
 
   const handleTextShadowChange = (event) => {
-    setAddTextShadow(event.target.checked);
+    if (event.target.checked) {
+      setAddTextShadow("true");
+    } else {
+      setAddTextShadow("");
+    }
   };
 
   const handleCoverBackgroundColorChange = (event) => {
@@ -252,7 +268,7 @@ const CardMaker = ({ token }) => {
               type='checkbox'
               id='addTextShadow'
               name='addTextShadow'
-              checked={addTextShadow}
+              checked={addTextShadow ? true : false}
               onChange={handleTextShadowChange}
             />
           </div>
