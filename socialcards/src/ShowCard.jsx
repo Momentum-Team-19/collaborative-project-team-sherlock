@@ -9,6 +9,7 @@ const ShowCard = ({ token }) => {
     const [backgroundColor, setBackgroundColor] = useState('')
     const [font, setFont] = useState('')
     const { cardID } = useParams()
+    // empty quotations are empty strings
     useEffect(() => {
         axios
             .get(`https://social-cards.fly.dev/api/cards/${cardID}/`,
@@ -25,32 +26,35 @@ const ShowCard = ({ token }) => {
             )
     }
     )
+
     return (
         <>
-            <div>
-                <div>
+            <div classname='showcard' style={{ backgroundColor }}>
+                <div className='card-content'>
                     <img href={imageURL}>
                     </img>
-                    <div>
+                    <div className='front-text'>
                         {frontText}
                     </div>
-                    <div>
+                    <div className='back-text'>
                         {backText}
                     </div>
-                    <div>
+                    <div className='font-style'>
                         {font}
                     </div>
                 </div>
+                {/* <button className="edit" onClick={handleEditClick}>Edit Card</button> */}
             </div>
         </>
     )
-}
+    }
 export default ShowCard;
 
-// ${id} for .get `` instead of ''
-// 2 parent divs. 1 with 3 divs other with 4 divs. 2nd parent div doesnt show anything until "click to see caption" is clicked
+// 2 parent divs. 1 with 3 divs other with 4 divs. 
 // 3 divs
 // A way to capture username for 1st div
 // Showing imageURL for 2nd div
 // click to see caption 3rd div with onclick function (inside a ternary statement)
 // edit card
+// add some classes to the divs
+// delete card button

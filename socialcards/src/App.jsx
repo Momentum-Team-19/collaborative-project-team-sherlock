@@ -23,6 +23,7 @@ function App() {
                 <Route path='/card/:cardID' element={<ShowCard token={token} />} />
                 <Route path='/login' element={<Login setToken={setToken} />} />
                 <Route path='/cardmaker' element={<CardMaker token={token} />} />
+                {/* <Route path='/editcard' element= {<EditCard token={token} />} /> */}
             </Routes>
             <Link to={{ pathname: "/login" }} className='sub-page-link'>
                 Login
@@ -33,6 +34,9 @@ function App() {
             <Link to={{ pathname: "/card/3" }} className='sub-page-link'>
                 Show Card
             </Link>
+            {/* <Link to={{ pathname: "/editcard" }} className='sub-page-link'>
+              Edit Card
+            </Link> */}
         </>
     );
 }
