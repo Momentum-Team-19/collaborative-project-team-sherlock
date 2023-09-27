@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
 
 const CardMaker = ({ token }) => {
   // Setting state for the preview blocks
@@ -27,6 +28,8 @@ const CardMaker = ({ token }) => {
   const [coverTextColor, setCoverTextColor] = useState("#000000");
   const [addTextShadow, setAddTextShadow] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
   const borderStyles = [
     "solid",
     "dotted",
@@ -79,41 +82,18 @@ const CardMaker = ({ token }) => {
               },
             ],
           })
-          .then((res) => console.log(res.data));
+
+          .then((res) => {
+            navigate("/");
+          })
+          .catch((error) => {
+            if (error.response) {
+              setErrorMessage(error);
+              console.log("error: ", error);
+            }
+          });
       });
   };
-  // const handleSubmit = () => {
-  //   axios.post(
-  //     "https://social-cards.fly.dev/api/cards/",
-  //     {
-  //       styles: [
-  //         { property: "backgroundColor", value: `${coverBackgroundColor}` },
-  //         { property: "color", value: `${coverTextColor}` },
-  //         { property: "textShadow", value: `${addTextShadow}` },
-  //         { property: "textAlign", value: `${textOrientation}` },
-  //         {
-  //           property: "border",
-  //           value: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
-  //         },
-  //         // { property: "", value: `${}` },
-  //         // { property: "", value: `${}` },
-  //         // { property: "", value: `${}` },
-  //         // { property: "", value: `${}` },
-  //         // { property: "", value: `${}` },
-  //         // { property: "", value: `${}` },
-  //       ],
-  //       front_text: coverText,
-  //       back_text: insideText,
-  //       imageURL: `${selectedImage}`,
-  //       font: selectedFont,
-  //       draft: isDraft,
-  //     },
-
-  //     {
-  //       headers: { Authorization: `Token ${token}` },
-  //     }
-  //   );
-  // };
 
   useEffect(() => {
     // When results are available, show the search results box
@@ -518,6 +498,8 @@ const CardMaker = ({ token }) => {
 
           {/* OPTIONS TO PREVIEW SWAP POINT */}
           <button onClick={handleSubmit}>Submit</button>
+
+          {errorMessage && <div>{error}</div>}
         </div>
         <div className='preview-container'>
           <h3>Cover Preview</h3>
