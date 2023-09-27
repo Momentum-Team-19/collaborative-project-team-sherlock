@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Profile = ({ token }) => {
   const [cards, setCards] = useState([])
@@ -33,9 +34,11 @@ const Profile = ({ token }) => {
       {/* {cards ? <h2>{cards[0].creator}'s cards</h2> : null} */}
       {cards &&
       cards.map((card) => (
+        <Link to={{pathname:  `/card/${card.id}`}}>
         <div className="gallery-preview"key={card.id} style={createStyleObject(card.styles)}>
               {card.front_text}
         </div>
+        </Link>
       ))}
     </div>
   );
