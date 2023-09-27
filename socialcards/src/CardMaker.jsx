@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
 
 const CardMaker = ({ token }) => {
   // Setting state for the preview blocks
@@ -25,8 +26,10 @@ const CardMaker = ({ token }) => {
   const [results, setResults] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [coverTextColor, setCoverTextColor] = useState("#000000");
-  const [addTextShadow, setAddTextShadow] = useState(false);
+  const [addTextShadow, setAddTextShadow] = useState("");
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
   const borderStyles = [
     "solid",
     "dotted",
@@ -39,37 +42,69 @@ const CardMaker = ({ token }) => {
   ];
 
   console.log(token);
-  const handleSubmit = () => {
-    axios.post(
-      "https://social-cards.fly.dev/api/cards/",
-      {
-        styles: [
-          { property: "backgroundColor", value: `${coverBackgroundColor}` },
-          { property: "color", value: `${coverTextColor}` },
-          { property: "textShadow", value: `${addTextShadow}` },
-          { property: "textAlign", value: `${textOrientation}` },
-          {
-            property: "border",
-            value: `${coverBorderWidth} ${coverBorderStyle} ${coverBorderColor}`,
-          },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-          // { property: "", value: `${}` },
-        ],
-        front_text: coverText,
-        back_text: insideText,
-        imageURL: `${selectedImage}`,
-        font: selectedFont,
-        draft: isDraft,
-      },
 
-      {
-        headers: { Authorization: `Token ${token}` },
-      }
-    );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        "https://social-cards.fly.dev/api/cards/",
+        {
+          front_text: coverText,
+          back_text: insideText,
+          image_url: selectedImage,
+        },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        return axios
+          .request({
+            url: `https://social-cards.fly.dev/api/cards/${res.data.id}/styles/`,
+            method: "POST",
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+            data: [
+              {
+                property: "backgroundColor",
+                value: coverBackgroundColor,
+              },
+              {
+                property: "fontFamily",
+                value: selectedFont,
+              },
+              {
+                property: "textAlign",
+                value: textOrientation,
+              },
+              {
+                property: "color",
+                value: coverTextColor,
+              },
+              {
+                property: "textShadow",
+                value: addTextShadow,
+              },
+              {
+                property: "border",
+                value: `${coverBorderWidth} ${coverBorderColor} ${coverBorderStyle}`,
+              },
+            ],
+          })
+
+          .then((res) => {
+            navigate("/");
+          })
+          .catch((error) => {
+            if (error) {
+              setErrorMessage(error);
+              console.log("error: ", error);
+            }
+          });
+      });
   };
 
   useEffect(() => {
@@ -94,7 +129,11 @@ const CardMaker = ({ token }) => {
   };
 
   const handleTextShadowChange = (event) => {
-    setAddTextShadow(event.target.checked);
+    if (event.target.checked) {
+      setAddTextShadow("true");
+    } else {
+      setAddTextShadow("");
+    }
   };
 
   const handleCoverBackgroundColorChange = (event) => {
@@ -229,7 +268,7 @@ const CardMaker = ({ token }) => {
               type='checkbox'
               id='addTextShadow'
               name='addTextShadow'
-              checked={addTextShadow}
+              checked={addTextShadow ? true : false}
               onChange={handleTextShadowChange}
             />
           </div>
@@ -475,6 +514,8 @@ const CardMaker = ({ token }) => {
 
           {/* OPTIONS TO PREVIEW SWAP POINT */}
           <button onClick={handleSubmit}>Submit</button>
+
+          {errorMessage && <div>{error}</div>}
         </div>
         <div className='preview-container'>
           <h3>Cover Preview</h3>
