@@ -52,5 +52,5 @@ export default ShowCard;
 // 3 divs
 // A way to capture username for 1st div
 // Showing imageURL for 2nd div
-// click to see caption 3rd div with onclick function (inside a ternary statement) 
+// click to see caption 3rd div with onclick function (inside a ternary statement)
 // edit card
