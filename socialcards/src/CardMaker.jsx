@@ -51,7 +51,7 @@ const CardMaker = ({ token }) => {
         {
           front_text: coverText,
           back_text: insideText,
-          image_url: selectedImage,
+          imageURL: selectedImage,
         },
         {
           headers: {
@@ -243,6 +243,7 @@ const CardMaker = ({ token }) => {
           <div className='single-option-container'>
             <label htmlFor='coverText'>Add cover text here: </label>
             <input
+              required
               type='text'
               id='coverText'
               name='coverText'
