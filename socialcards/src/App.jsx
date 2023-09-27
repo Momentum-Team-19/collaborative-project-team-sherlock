@@ -9,6 +9,7 @@ import ShowCard from "./ShowCard";
 import { Route, Routes, Link } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import NavBar from "./NavBar";
+import Profile from "./Profile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,6 +25,7 @@ function App() {
         <Route path='/card/:cardID' element={<ShowCard token={token} />} />
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/cardmaker' element={<CardMaker token={token} />} />
+        <Route path='/profile' element={<Profile token={token} />} />
       </Routes>
       
     </>

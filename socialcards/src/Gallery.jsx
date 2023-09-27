@@ -44,7 +44,7 @@ const Gallery = ({ token }) => {
               }}> */}
               <div className="gallery-preview" key={card.id} style={createStyleObject(card.styles)}>
               {card.front_text}
-            </div>
+              </div>
             </Link>
           </Tilt>
           ))}
