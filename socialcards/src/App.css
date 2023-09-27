@@ -152,6 +152,10 @@ button:focus-visible {
   height: 300px;
   width: 300px;
   margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
 }
 
 .galleryBox {

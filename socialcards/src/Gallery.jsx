@@ -17,16 +17,16 @@ const Gallery = ({ token }) => {
       })
   }, [token])
     
-  const createStyleObject = (styles) => {
+  const createStyleObject = (styles, imageURL) => {
     console.log("creating style object")
     console.log("Here are the styles for a card ", styles)
     // make a new object using dynamic keys and values from the passed in styles
     const styleObj = {}
-    styles.forEach(style => styleObj[style.property] = style.value)
-    console.log("Here is the new style object: ", styleObj)
-    return styleObj
-  }
-  
+    styles.forEach((style) => (styleObj[style.property] = style.value))
+    styleObj['backgroundImage'] = `url(${imageURL})`
+    console.log("Here is the new style object: ", styleObj);
+    return styleObj;
+  };
   
   return (
     <div>
@@ -42,7 +42,7 @@ const Gallery = ({ token }) => {
               textAlign: card.textOrientation,
               border: card.coverBorderWidth
               }}> */}
-              <div className="gallery-preview" key={card.id} style={createStyleObject(card.styles)}>
+              <div className="gallery-preview" key={card.id} style={createStyleObject(card.styles, card.imageURL)}>
               {card.front_text}
               </div>
             </Link>
