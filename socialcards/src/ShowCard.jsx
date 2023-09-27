@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
 const ShowCard = ({ token }) => {
     const [frontText, setFrontText] = useState('')
     const [backText, setBackText] = useState('')
