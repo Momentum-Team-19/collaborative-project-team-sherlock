@@ -2,6 +2,7 @@
   max-width: 1280px;
   width: 100%;
   text-align: center;
+  height: 100vh;
 }
 
 :root {
@@ -31,8 +32,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -129,14 +128,14 @@ button:focus-visible {
   margin-bottom: 10px;
 }
 
-.galleryCard {
+/* .galleryCard {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 40%;
   border-radius: 5px;
   margin: auto;
   text-align: center;
-}
+} */
 
 .galleryCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
@@ -146,3 +145,78 @@ button:focus-visible {
   padding: 10px;
 
 } */
+
+.gallery-preview {
+  margin: 0 auto; /* Center horizontally */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: black;
+  border: 1px solid white;
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+}
+
+.galleryBox {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: fixed;
+  border-right: 1px solid grey;
+  height: 100vh;
+}
+
+.navbutton {
+  border: 1px solid grey;
+  margin: 3px;
+  padding: 2px;
+  border-radius: 5px;
+  width: 25px;
+  color: white;
+  cursor: pointer;
+  margin-top: 100px;
+}
+@media (max-height: 600px) {
+  .navbutton {
+    margin-top: 50px;
+  }
+}
+
+@media (max-height: 400px) {
+  .navbutton {
+    margin-top: 30px;
+  }
+}
+
+.navbutton:hover {
+  border: 1px solid #2dc1f2;
+  color: #2dc1f2;
+}
+
+.navbutton:active {
+  transform: scale(95%);
+  transition: transform 0.2s;
+}
+
+.buttoncontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.loginbox {
+  display: flex;
+  place-items: center;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

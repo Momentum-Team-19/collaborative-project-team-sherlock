@@ -42,7 +42,7 @@ const Gallery = ({ token }) => {
               textAlign: card.textOrientation,
               border: card.coverBorderWidth
               }}> */}
-              <div className="cover-preview" key={card.id} style={createStyleObject(card.styles)}>
+              <div className="gallery-preview" key={card.id} style={createStyleObject(card.styles)}>
               {card.front_text}
             </div>
             </Link>

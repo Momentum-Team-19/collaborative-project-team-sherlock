@@ -27,7 +27,7 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div>
+    <div className="loginbox">
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className='username-input'>
           <label htmlFor='username'>Username: </label>
