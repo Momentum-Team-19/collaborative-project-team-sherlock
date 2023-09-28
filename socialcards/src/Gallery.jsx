@@ -18,20 +18,43 @@ const Gallery = ({ token }) => {
   }, [token]);
 
   // need to write handler handleFollow that onClick does axios post
-  const handleFollow = (user) => {
+  const handleFollow = (creatorId) => {
+    const followedUserId = parseInt(creatorId);
+
+    console.log("followedUserId:", followedUserId);
+    console.log("results.creator_id:", results.creator_id);
+    console.log("results: ", results);
+
     axios
       .post(
         "https://social-cards.fly.dev/api/follows/",
         {
           status: 1,
-          followed_user: `${user.id}`,
+          followed_user: followedUserId,
         },
         {
           headers: { Authorization: `Token ${token}` },
         }
       )
       .then((res) => {
-        console.log(user), navigate("/");
+        console.log("Response:", res.data);
+        navigate("/");
+      });
+  };
+
+  const handleUnfollow = (creatorId) => {
+    const followedUserId = parseInt(creatorId);
+
+    console.log("followedUserId:", followedUserId);
+    console.log("results.creator_id:", results.creator_id);
+    console.log("results: ", results);
+
+    axios
+      .delete(`https://social-cards.fly.dev/api/unfollow/${creatorId}`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        navigate("/");
       });
   };
 
@@ -57,8 +80,17 @@ const Gallery = ({ token }) => {
               <Tilt key={index}>
                 <div className='creator'>
                   created by: {card.creator}
-                  <button onClick={handleFollow} className='follow-button'>
+                  <button
+                    onClick={() => handleFollow(card.creator_id)}
+                    className='follow-button'
+                  >
                     Follow
+                  </button>
+                  <button
+                    onClick={() => handleUnfollow(card.creator_id)}
+                    className='unfollow-button'
+                  >
+                    Unfollow
                   </button>
                 </div>
                 <Link to={{ pathname: `/card/${card.id}` }}>

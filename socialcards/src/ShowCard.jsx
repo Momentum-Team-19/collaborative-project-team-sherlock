@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 const ShowCard = ({ token }) => {
     const [frontText, setFrontText] = useState('')
     const [backText, setBackText] = useState('')
@@ -9,6 +9,7 @@ const ShowCard = ({ token }) => {
     const [font, setFont] = useState('')
     const { cardID } = useParams()
     const [creator, setCreator] = useState('')
+    const navigate = useNavigate();
     // empty quotations are empty strings
     useEffect(() => {
         axios
@@ -35,6 +36,7 @@ const ShowCard = ({ token }) => {
             .then(() => {
                 // Optionally, you can redirect the user to another page or take some other action after successful deletion.
                 console.log("Card deleted successfully!");
+                navigate('/')
             })
             .catch((error) => {
                 console.error("Error deleting card:", error);
