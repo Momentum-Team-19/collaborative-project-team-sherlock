@@ -10,6 +10,7 @@ import { Route, Routes, Link } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import NavBar from "./NavBar";
 import Profile from "./Profile";
+import EditCard from "./EditCard"
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,6 +27,7 @@ function App() {
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/cardmaker' element={<CardMaker token={token} />} />
         <Route path='/profile' element={<Profile token={token} />} />
+        <Route path='/editcard/:cardID' element={<EditCard token={token} />} />
       </Routes>
       
     </>
